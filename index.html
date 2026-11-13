@@ -221,17 +221,17 @@
     <span class="v13 reveal d2">Viernes 13</span>
     <span class="name reveal d3" id="nombre">Katt!</span>
   </h1>
-  <p class="sub reveal d4">Dicen que hoy es un día de mala suerte… pero claramente no conocen a la persona más suertuda (y genial) del mundo <i data-lucide="heart"></i></p>
+  <p class="sub reveal d4">Dicen que hoy es día de mala suerte… pero contigo no aplica p, eres demasiado bacán pa eso xd <i data-lucide="heart"></i></p>
 
-  <button class="btn reveal d4" id="abrir"><i data-lucide="wand-sparkles"></i><span>Abrir sorpresa (si te atreves)</span></button>
+  <button class="btn reveal d4" id="abrir"><i data-lucide="wand-sparkles"></i><span>Abre tu sorpresa si te atreves xd</span></button>
 
   <div class="letter" id="carta" aria-live="polite"><div>
     <article class="card">
-      <h2><i data-lucide="sparkles"></i> Tu fortuna del Viernes 13</h2>
-      <p>Querida <b class="kname">Katt</b>, las cartas, la luna y este gato negro han hablado:</p>
+      <h2><i data-lucide="sparkles"></i> Tu suerte de hoy p</h2>
+      <p>Ya pues <b class="kname">Katt</b>, la luna y este gatito negro ya hablaron:</p>
       <ul id="fortunas"></ul>
-      <p>Y como hoy la mala suerte no tiene permiso de acercarse a ti, aquí va un contador para lo que viene: <b>¡Navidad!</b></p>
-      <p class="sign">— con cariño (y un poquito de miedo)</p>
+      <p>Y como hoy la mala suerte no tiene permiso de acercarse a ti, ahí te va un contador pa lo que se viene: <b>¡Navidad!</b></p>
+      <p class="sign">— con cariño (y un toque de miedo xd)</p>
     </article>
   </div></div>
 
@@ -242,7 +242,7 @@
 <section class="xmas" id="navidad">
   <div class="lights reveal" id="lights" aria-hidden="true"></div>
   <h2 class="reveal d1">Cuenta regresiva<br>a Navidad</h2>
-  <p class="lead reveal d2">Sobreviviste al Viernes 13, así que ahora toca contar los días hasta los regalos, el ponche y las luces.</p>
+  <p class="lead reveal d2">Sobreviviste al Viernes 13, ahora sí toca contar los días para los regalos, las luces y las fotos bonitas.</p>
 
   <div class="countdown reveal d3" id="countdown" role="timer" aria-live="off">
     <div class="unit"><span class="num" id="d"><span>--</span></span><span class="lbl">días</span></div>
@@ -253,7 +253,7 @@
   <p class="merry" id="merry">¡FELIZ NAVIDAD, KATT!</p>
 
   <div class="tree reveal d4" id="arbol" role="button" tabindex="0" aria-label="Tocar el árbol"><i data-lucide="tree-pine"></i></div>
-  <p class="tip reveal d4"><i data-lucide="gift"></i> toca el árbol</p>
+  <p class="tip reveal d4"><i data-lucide="gift"></i> toca el árbol p</p>
 </section>
 
 <footer>Hecho con <i data-lucide="heart"></i> para <b class="kname">Katt</b></footer>
@@ -302,16 +302,16 @@
 
   // ---------- Fortunas ----------
   const pool = [
-    ['cat','Un gato negro se cruzará en tu camino… y te dará buena suerte por todo el año.'],
-    ['clover','El número 13 es oficialmente tu número de la suerte desde hoy.'],
-    ['pizza','Hay comida rica en tu futuro cercano. Mucha.'],
-    ['laugh','Te vas a reír tanto que te va a doler la panza.'],
-    ['heart','Alguien está pensando en ti ahora mismo (spoiler: yo).'],
-    ['moon','La luna dice que eres demasiado cool para tener mala suerte.'],
-    ['gift','Se acercan regalos. Muchos. Prepárate.'],
-    ['eye','Tu bola de cristal muestra: siestas largas y cero estrés.'],
-    ['sparkles','Todo lo que salga mal hoy, en realidad era un plot twist a tu favor.'],
-    ['ghost','Ni los fantasmas se atreven a arruinarte el día.']
+    ['cat','Si se te cruza un gato negro, tranqui, es de los buenos y viene con suerte xd'],
+    ['clover','Desde hoy el 13 es tu número de la suerte, ya fue'],
+    ['pizza','Se viene comidita rica en tu futuro, de la buena p'],
+    ['laugh','Hoy te toca un día bacán, de esos que no se olvidan p xd'],
+    ['heart','Alguien está pensando en ti ahora mismo (spoiler: yo xd)'],
+    ['moon','La luna dice que eres demasiado bacán pa tener mala suerte'],
+    ['gift','Se vienen regalos, así que prepárate p'],
+    ['eye','Tu bola de cristal dice: harto descanso y cero estrés'],
+    ['sparkles','Si algo sale mal hoy, es plot twist a tu favor, confía xd'],
+    ['ghost','Ni los fantasmas se atreven a malograrte el día']
   ];
   pool.sort(() => Math.random() - .5).slice(0, 4).forEach(([ic, t], i) => {
     const li = document.createElement('li');
@@ -514,7 +514,7 @@
   let opened = false;
   $('abrir').addEventListener('click', () => {
     $('carta').classList.add('show');
-    $('abrir').lastChild.textContent = '¡Más suerte, por favor!';
+    $('abrir').lastChild.textContent = '¡Más suerte, porfa! xd';
     spookyBurst();
     if (!opened && !playing) startMusic();
     opened = true;
