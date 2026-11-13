@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¡Feliz Viernes 13, Katt!</title>
+<meta name="description" content="Una sorpresa de Viernes 13 para Katt, con cuenta regresiva hasta Navidad.">
+<meta property="og:title" content="🖤 ¡Feliz Viernes 13, Katt! 🎄">
+<meta property="og:description" content="Tengo una sorpresa para ti... ábrela si te atreves 👻">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐈‍⬛</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Fredoka:wght@400;600;700&family=Mountains+of+Christmas:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#0b0716; --night2:#1d1036; --purple:#7b3fe4; --pink:#ff5fa2;
+    --moon:#fff6d5; --ink:#f4eefe; --muted:#bfb3d9;
+    --red:#e23b3b; --green:#1f9d55; --gold:#ffd166;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Fredoka',system-ui,sans-serif;color:var(--ink);
+    background:var(--night);overflow-x:hidden;min-height:100vh;
+  }
+  canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:50}
+
+  /* ---------- HERO (Viernes 13) ---------- */
+  .hero{
+    position:relative;min-height:100vh;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;padding:40px 16px 80px;
+    background:radial-gradient(ellipse at 50% 20%,var(--night2) 0%,var(--night) 70%);
+    overflow:hidden;
+  }
+  .stars{position:absolute;inset:0;pointer-events:none}
+  .star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 3s infinite ease-in-out}
+  @keyframes twinkle{0%,100%{opacity:.2}50%{opacity:1}}
+
+  .moon{
+    position:relative;width:min(220px,50vw);aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%,#fffdf0,var(--moon) 55%,#e9d9a0);
+    box-shadow:0 0 60px 20px rgba(255,246,213,.25),0 0 140px 60px rgba(123,63,228,.25);
+    margin-bottom:-30px;animation:float 6s ease-in-out infinite;
+  }
+  .moon::before,.moon::after{content:"";position:absolute;border-radius:50%;background:rgba(200,180,120,.35)}
+  .moon::before{width:18%;height:18%;top:25%;left:55%}
+  .moon::after{width:12%;height:12%;top:60%;left:30%}
+  .cat{position:absolute;bottom:-6%;left:50%;transform:translateX(-50%);width:62%}
+  .cat .tail{transform-origin:78px 112px;animation:tail 2.4s ease-in-out infinite}
+  .cat .eye{animation:blink 4s infinite}
+  @keyframes tail{0%,100%{transform:rotate(0)}50%{transform:rotate(14deg)}}
+  @keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+  .cat .eye{transform-box:fill-box;transform-origin:center}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+  h1{margin-top:60px;line-height:1}
+  h1 .feliz{display:block;font-size:clamp(1.6rem,5vw,2.6rem);font-weight:700;color:var(--muted);letter-spacing:.05em}
+  h1 .v13{
+    display:block;font-family:'Creepster',cursive;font-weight:400;
+    font-size:clamp(3.4rem,14vw,8rem);color:#fff;letter-spacing:.04em;
+    text-shadow:0 0 10px var(--purple),0 0 30px var(--purple),4px 4px 0 #3a1470;
+    animation:flicker 5s infinite;
+  }
+  @keyframes flicker{0%,18%,22%,25%,53%,57%,100%{opacity:1}20%,24%,55%{opacity:.55}}
+  h1 .name{display:block;font-size:clamp(2rem,8vw,4rem);font-weight:700;color:var(--pink);text-shadow:0 0 18px rgba(255,95,162,.6)}
+  .sub{margin-top:18px;font-size:clamp(1rem,3.4vw,1.25rem);color:var(--muted);max-width:560px}
+
+  .bat{position:absolute;font-size:28px;pointer-events:none;animation:flyBat linear infinite;opacity:.85}
+  @keyframes flyBat{
+    0%{transform:translate(-10vw,0) scale(.8)}
+    25%{transform:translate(25vw,-30px) scale(1)}
+    50%{transform:translate(55vw,20px) scale(.9)}
+    75%{transform:translate(85vw,-20px) scale(1.05)}
+    100%{transform:translate(115vw,10px) scale(.8)}
+  }
+  .ghost{position:absolute;font-size:34px;opacity:.5;animation:ghost 7s ease-in-out infinite}
+  @keyframes ghost{0%,100%{transform:translateY(0);opacity:.25}50%{transform:translateY(-30px);opacity:.7}}
+
+  .btn{
+    margin-top:30px;border:0;cursor:pointer;font:700 1.15rem 'Fredoka',sans-serif;
+    padding:16px 30px;border-radius:999px;color:#fff;
+    background:linear-gradient(135deg,var(--purple),var(--pink));
+    box-shadow:0 8px 30px rgba(255,95,162,.45);transition:transform .2s,box-shadow .2s;
+  }
+  .btn:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 12px 40px rgba(255,95,162,.6)}
+  .btn:active{transform:scale(.97)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+
+  /* ---------- Carta sorpresa ---------- */
+  .letter{
+    display:none;margin-top:30px;max-width:540px;width:100%;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(8px);border-radius:22px;padding:28px 24px;text-align:left;
+    animation:pop .6s cubic-bezier(.2,1.4,.4,1);
+  }
+  .letter.show{display:block}
+  @keyframes pop{from{opacity:0;transform:scale(.7) rotate(-4deg)}to{opacity:1;transform:none}}
+  .letter h2{font-size:1.4rem;color:var(--gold);margin-bottom:12px}
+  .letter p{line-height:1.6;color:var(--ink);margin-bottom:10px}
+  .letter ul{list-style:none;margin:10px 0}
+  .letter li{padding:6px 0;line-height:1.5}
+  .letter .sign{text-align:right;color:var(--pink);font-weight:700;margin-top:14px}
+
+  .scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:.95rem;text-decoration:none;animation:bounce 2s infinite}
+  @keyframes bounce{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+  /* ---------- NAVIDAD ---------- */
+  .xmas{
+    position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:70px 16px;overflow:hidden;
+    background:linear-gradient(180deg,var(--night) 0%,#0e2a2a 45%,#123b2b 100%);
+  }
+  .xmas h2{
+    font-family:'Mountains of Christmas',cursive;font-size:clamp(2.4rem,9vw,4.6rem);
+    color:#fff;text-shadow:0 0 18px rgba(255,209,102,.6),3px 3px 0 var(--red);line-height:1.1;
+  }
+  .xmas .lead{margin-top:12px;color:#d6f5e3;font-size:clamp(1rem,3.4vw,1.2rem);max-width:560px}
+  .lights{display:flex;gap:clamp(10px,3vw,22px);justify-content:center;margin:0 0 26px}
+  .lights span{width:14px;height:20px;border-radius:50% 50% 45% 45%;animation:glow 1.2s infinite alternate}
+  .lights span:nth-child(4n+1){background:var(--red);color:var(--red)}
+  .lights span:nth-child(4n+2){background:var(--gold);color:var(--gold);animation-delay:.3s}
+  .lights span:nth-child(4n+3){background:#3ee07a;color:#3ee07a;animation-delay:.6s}
+  .lights span:nth-child(4n){background:#5ab0ff;color:#5ab0ff;animation-delay:.9s}
+  @keyframes glow{from{opacity:.35;box-shadow:none}to{opacity:1;box-shadow:0 0 14px 4px currentColor}}
+
+  .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,2.5vw,18px);margin-top:32px;width:100%;max-width:620px}
+  .unit{
+    background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.18);border-radius:18px;
+    padding:clamp(12px,3vw,22px) 4px;position:relative;
+  }
+  .unit::before{content:"";position:absolute;top:-2px;left:12%;right:12%;height:8px;border-radius:0 0 8px 8px;
+    background:repeating-linear-gradient(90deg,var(--red) 0 10px,#fff 10px 20px)}
+  .num{display:block;font-size:clamp(2rem,9vw,3.6rem);font-weight:700;color:#fff;font-variant-numeric:tabular-nums;line-height:1}
+  .lbl{display:block;margin-top:6px;font-size:clamp(.7rem,2.6vw,.95rem);color:#bfe8cf;text-transform:uppercase;letter-spacing:.08em}
+  .merry{display:none;font-size:clamp(1.6rem,6vw,2.6rem);margin-top:24px;color:var(--gold);font-weight:700}
+
+  .tree{font-size:clamp(4rem,16vw,7rem);margin-top:30px;filter:drop-shadow(0 0 18px rgba(255,209,102,.5));cursor:pointer;user-select:none;transition:transform .2s}
+  .tree:hover{transform:scale(1.08) rotate(-3deg)}
+  .tip{color:#9fd3b6;font-size:.9rem;margin-top:6px}
+
+  footer{text-align:center;padding:26px 16px;color:var(--muted);background:#123b2b;font-size:.95rem}
+  footer b{color:var(--pink)}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+
+<!-- ===================== VIERNES 13 ===================== -->
+<section class="hero" id="inicio">
+  <div class="stars" id="stars"></div>
+  <span class="ghost" style="top:18%;left:8%">👻</span>
+  <span class="ghost" style="top:30%;right:9%;animation-delay:2s">👻</span>
+  <span class="ghost" style="bottom:20%;left:14%;animation-delay:4s;font-size:26px">🕸️</span>
+  <span class="ghost" style="bottom:26%;right:12%;animation-delay:1s;font-size:28px">🔮</span>
+
+  <div class="moon" aria-hidden="true">
+    <svg class="cat" viewBox="0 0 120 130">
+      <path class="tail" d="M78 112 C 110 112, 112 80, 98 70 C 92 66, 88 72, 94 76 C 102 82, 100 102, 78 104 Z" fill="#120a1f"/>
+      <ellipse cx="58" cy="100" rx="30" ry="28" fill="#120a1f"/>
+      <circle cx="58" cy="58" r="24" fill="#120a1f"/>
+      <path d="M38 46 L36 22 L52 38 Z M78 46 L80 22 L64 38 Z" fill="#120a1f"/>
+      <ellipse class="eye" cx="49" cy="57" rx="5" ry="6" fill="#ffd166"/>
+      <ellipse class="eye" cx="67" cy="57" rx="5" ry="6" fill="#ffd166"/>
+      <ellipse cx="49" cy="57" rx="1.6" ry="5" fill="#120a1f"/>
+      <ellipse cx="67" cy="57" rx="1.6" ry="5" fill="#120a1f"/>
+      <path d="M55 66 L58 69 L61 66 Z" fill="#ff5fa2"/>
+    </svg>
+  </div>
+
+  <h1>
+    <span class="feliz">¡Feliz</span>
+    <span class="v13">Viernes 13</span>
+    <span class="name" id="nombre">Katt!</span>
+  </h1>
+  <p class="sub">Dicen que hoy es un día de mala suerte… pero claramente no conocen a la persona más suertuda (y genial) del mundo 🖤🐈‍⬛</p>
+
+  <button class="btn" id="abrir">🔮 Abrir sorpresa (si te atreves)</button>
+
+  <article class="letter" id="carta" aria-live="polite">
+    <h2>✨ Tu fortuna del Viernes 13 ✨</h2>
+    <p>Querida <b class="kname">Katt</b>, las cartas, la luna y este gato negro han hablado:</p>
+    <ul id="fortunas"></ul>
+    <p>Y como hoy la mala suerte no tiene permiso de acercarse a ti, aquí va un contador para lo que viene: <b>¡Navidad!</b> 🎄</p>
+    <p class="sign">— con cariño (y un poquito de miedo) 🦇</p>
+  </article>
+
+  <a class="scroll-hint" href="#navidad">⬇ ¿cuánto falta para Navidad?</a>
+</section>
+
+<!-- ===================== NAVIDAD ===================== -->
+<section class="xmas" id="navidad">
+  <div class="lights" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <h2>Cuenta regresiva<br>a Navidad</h2>
+  <p class="lead">Sobreviviste al Viernes 13, así que ahora toca contar los días hasta los regalos, el ponche y las luces 🎁</p>
+
+  <div class="countdown" id="countdown" role="timer" aria-live="off">
+    <div class="unit"><span class="num" id="d">--</span><span class="lbl">días</span></div>
+    <div class="unit"><span class="num" id="h">--</span><span class="lbl">horas</span></div>
+    <div class="unit"><span class="num" id="m">--</span><span class="lbl">minutos</span></div>
+    <div class="unit"><span class="num" id="s">--</span><span class="lbl">segundos</span></div>
+  </div>
+  <p class="merry" id="merry">🎄 ¡FELIZ NAVIDAD, KATT! 🎄</p>
+
+  <div class="tree" id="arbol" role="button" tabindex="0" aria-label="Tocar el árbol">🎄</div>
+  <p class="tip">(toca el árbol 👀)</p>
+</section>
+
+<footer>Hecho con 🖤 y 🎄 para <b class="kname">Katt</b></footer>
+
+<script>
+(() => {
+  // Nombre personalizable con ?para=Nombre
+  const params = new URLSearchParams(location.search);
+  const name = (params.get('para') || 'Katt').slice(0, 30);
+  document.getElementById('nombre').textContent = name + '!';
+  document.querySelectorAll('.kname').forEach(el => el.textContent = name);
+  document.getElementById('merry').textContent = `🎄 ¡FELIZ NAVIDAD, ${name.toUpperCase()}! 🎄`;
+  document.title = `¡Feliz Viernes 13, ${name}!`;
+
+  // Estrellas
+  const stars = document.getElementById('stars');
+  for (let i = 0; i < 90; i++) {
+    const s = document.createElement('span');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.animationDelay = (Math.random() * 3) + 's';
+    const sz = Math.random() < .15 ? 3 : 2;
+    s.style.width = s.style.height = sz + 'px';
+    stars.appendChild(s);
+  }
+
+  // Murciélagos
+  const hero = document.getElementById('inicio');
+  for (let i = 0; i < 5; i++) {
+    const b = document.createElement('span');
+    b.className = 'bat';
+    b.textContent = '🦇';
+    b.style.top = (8 + Math.random() * 45) + '%';
+    b.style.left = '0';
+    b.style.animationDuration = (10 + Math.random() * 10) + 's';
+    b.style.animationDelay = (-Math.random() * 15) + 's';
+    hero.appendChild(b);
+  }
+
+  // Fortunas
+  const pool = [
+    '🐈‍⬛ Un gato negro se cruzará en tu camino… y te dará buena suerte por todo el año.',
+    '🍀 El número 13 es oficialmente tu número de la suerte desde hoy.',
+    '🍕 Hay comida rica en tu futuro cercano. Mucha.',
+    '😂 Te vas a reír tanto que te va a doler la panza.',
+    '💌 Alguien está pensando en ti ahora mismo (spoiler: yo).',
+    '🌙 La luna dice que eres demasiado cool para tener mala suerte.',
+    '🎁 Se acercan regalos. Muchos. Prepárate.',
+    '🔮 Tu bola de cristal muestra: siestas largas y cero estrés.',
+    '✨ Todo lo que salga mal hoy, en realidad era un plot twist a tu favor.',
+    '👻 Ni los fantasmas se atreven a arruinarte el día.'
+  ];
+  const ul = document.getElementById('fortunas');
+  pool.sort(() => Math.random() - .5).slice(0, 4).forEach(t => {
+    const li = document.createElement('li'); li.textContent = t; ul.appendChild(li);
+  });
+
+  // ---------- Partículas (confeti / nieve) ----------
+  const cv = document.getElementById('fx'), ctx = cv.getContext('2d');
+  let W, H, parts = [];
+  const resize = () => { W = cv.width = innerWidth * devicePixelRatio; H = cv.height = innerHeight * devicePixelRatio; cv.style.width = innerWidth+'px'; cv.style.height = innerHeight+'px'; };
+  addEventListener('resize', resize); resize();
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function burst(emojis, n = 80) {
+    if (reduce) return;
+    for (let i = 0; i < n; i++) {
+      parts.push({
+        x: W / 2, y: H * .55,
+        vx: (Math.random() - .5) * 26 * devicePixelRatio,
+        vy: (-Math.random() * 22 - 6) * devicePixelRatio,
+        g: .55 * devicePixelRatio, life: 160 + Math.random() * 60,
+        r: Math.random() * Math.PI, vr: (Math.random() - .5) * .3,
+        t: emojis[Math.floor(Math.random() * emojis.length)],
+        size: (18 + Math.random() * 18) * devicePixelRatio
+      });
+    }
+  }
+  // nieve suave continua cuando se ve la sección de Navidad
+  const xmas = document.getElementById('navidad');
+  let snowing = false;
+  new IntersectionObserver(([e]) => snowing = e.isIntersecting, { threshold: .25 }).observe(xmas);
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    if (snowing && !reduce && Math.random() < .5) {
+      parts.push({ x: Math.random() * W, y: -10, vx: (Math.random() - .5) * devicePixelRatio, vy: (1 + Math.random() * 1.5) * devicePixelRatio,
+        g: 0, life: 900, r: 0, vr: 0, t: '❄', size: (8 + Math.random() * 12) * devicePixelRatio, snow: true });
+    }
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    parts = parts.filter(p => p.life > 0 && p.y < H + 40);
+    for (const p of parts) {
+      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life--;
+      if (!p.snow) p.vx *= .99;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+      ctx.globalAlpha = Math.min(1, p.life / 40) * (p.snow ? .8 : 1);
+      ctx.font = `${p.size}px serif`;
+      ctx.fillStyle = '#fff';
+      ctx.fillText(p.t, 0, 0);
+      ctx.restore();
+    }
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  // Botón sorpresa
+  const btn = document.getElementById('abrir'), carta = document.getElementById('carta');
+  btn.addEventListener('click', () => {
+    carta.classList.add('show');
+    btn.textContent = '🖤 ¡Más suerte, por favor!';
+    burst(['🖤','🐈‍⬛','🦇','✨','🍀','💜','🔮','🎃']);
+  });
+
+  // Árbol
+  const arbol = document.getElementById('arbol');
+  const xmasBurst = () => burst(['🎁','⭐','❄️','🎄','🔔','🍪','❤️','💚'], 90);
+  arbol.addEventListener('click', xmasBurst);
+  arbol.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); xmasBurst(); } });
+
+  // ---------- Cuenta regresiva a Navidad ----------
+  const $ = id => document.getElementById(id);
+  const pad = n => String(n).padStart(2, '0');
+  function target() {
+    const now = new Date();
+    let t = new Date(now.getFullYear(), 11, 25, 0, 0, 0);
+    if (now >= new Date(now.getFullYear(), 11, 26)) t = new Date(now.getFullYear() + 1, 11, 25);
+    return t;
+  }
+  let celebrated = false;
+  function tick() {
+    const now = new Date(), t = target();
+    const isXmas = now.getMonth() === 11 && now.getDate() === 25;
+    if (isXmas) {
+      $('countdown').style.display = 'none';
+      $('merry').style.display = 'block';
+      if (!celebrated) { celebrated = true; setTimeout(xmasBurst, 600); }
+      return;
+    }
+    let diff = Math.max(0, t - now);
+    const d = Math.floor(diff / 864e5); diff -= d * 864e5;
+    const h = Math.floor(diff / 36e5);  diff -= h * 36e5;
+    const m = Math.floor(diff / 6e4);   diff -= m * 6e4;
+    const s = Math.floor(diff / 1e3);
+    $('d').textContent = d; $('h').textContent = pad(h); $('m').textContent = pad(m); $('s').textContent = pad(s);
+  }
+  tick(); setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
